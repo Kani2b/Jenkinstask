@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --reporters=default --reporters=jest-junit",
     "start": "node server.js",
     "build": "browserify -t [ babelify --presets [ @babel/preset-react @babel/preset-env ] ] src/main.js -o public/js/main.js"
   },
@@ -22,6 +22,8 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.8",
+    "jest": "^27.5.1",
     "jest-junit": "^16.0.0"
   }
 }
+
