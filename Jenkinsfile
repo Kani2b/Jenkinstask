@@ -6,15 +6,7 @@ pipeline {
         NODEJS_HOME = "${tool 'NodeJS 12'}"
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                // Checkout source code from version control
-                git 'https://github.com/Kani2b/Jenkinstask.git'
-            }
-        }
-
-        stage('Install Dependencies') {
+     stage('Install Dependencies') {
             steps {
                 // Install Node.js dependencies
                 sh 'npm install'
