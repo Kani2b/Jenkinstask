@@ -1,24 +1,22 @@
-// __tests__/server.test.js
+const request = require('supertest');
+const app = require('../server');
 
-const { add, multiply } = require('../server');
+describe('Test the root path', () => {
+  let server;
 
-test('add function should add two numbers correctly', () => {
-  const result = add(3, 5);
-  expect(result).toBe(8);
-});
+  beforeAll((done) => {
+    server = app.listen(3000, done);
+  });
 
-test('multiply function should multiply two numbers correctly', () => {
-  const result = multiply(2, 4);
-  expect(result).toBe(8);
-});
+  afterAll((done) => {
+    server.close(done);
+  });
 
-test('add function should handle negative numbers', () => {
-  const result = add(-3, 7);
-  expect(result).toBe(4);
-});
+  test('It should respond to the GET method', async () => {
+    const response = await request(app).get('/');
+    expect(response.statusCode).toBe(200);
+  });
 
-test('multiply function should handle zero as one of the operands', () => {
-  const result = multiply(5, 0);
-  expect(result).toBe(0);
+  // Add more tests as needed
 });
 
