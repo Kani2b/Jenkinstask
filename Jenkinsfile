@@ -3,17 +3,10 @@ pipeline {
 
     environment {
         PATH = "/usr/local/bin:${env.PATH}"
-        NODEJS_HOME = "${tool 'NodeJS 14'}"
+        NODEJS_HOME = "${tool 'NodeJS 12'}"
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout source code from version control
-                git 'https://github.com/your-username/your-repo.git'
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 // Install Node.js dependencies
@@ -23,14 +16,14 @@ pipeline {
 
         stage('Run Unit Tests') {
             steps {
-                // Run automated unit tests (e.g., using Jest)
-                sh 'npm test'
+                // Run automated unit tests using Jest and generate JUnit reports
+                sh 'npm test -- --reporters=default --reporters=jest-junit'
             }
 
             post {
                 always {
-                    // Archive test reports or take any other post-test actions
-                    junit 'path/to/your/test/results/*.xml'
+                    // Archive test reports
+                    junit 'junit-report/*.xml'
                 }
             }
         }
