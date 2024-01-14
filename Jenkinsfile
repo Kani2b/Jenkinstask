@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout source code from version control
-                git 'https://github.com/your-username/your-repo.git'
+                git 'https://github.com/Kani2b/Jenkinstask.git'
             }
         }
 
