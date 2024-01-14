@@ -6,7 +6,8 @@ pipeline {
         NODEJS_HOME = "${tool 'NodeJS 12'}"
     }
 
-     stage('Install Dependencies') {
+    stages {
+        stage('Install Dependencies') {
             steps {
                 // Install Node.js dependencies
                 sh 'npm install'
