@@ -14,18 +14,28 @@ pipeline {
             }
         }
 
-        stage('Run Unit Tests') {
+        stage('Run Automated Tests') {
             steps {
-                // Run automated unit tests using Jest without publishing JUnit reports
-                sh 'npx jest'
+                // Run automated unit tests using Jest
+                script {
+                    sh 'npx jest'
+                }
             }
         }
     }
 
     post {
         failure {
-            // Actions to perform if any stage fails (e.g., send notification)
-            echo 'Pipeline failed! Notify team, send email, etc.'
+            script {
+                // Check test results
+                def testResult = sh(script: 'npx jest', returnStatus: true)
+                if (testResult != 0) {
+                    echo 'Tests failed. Triggering rollback.'
+                    // Implement rollback steps here
+                    // For example, you might use Git to revert to the previous commit
+                    sh 'git reset --hard HEAD^'
+                }
+            }
         }
     }
 }
