@@ -17,13 +17,16 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 // Run automated unit tests using Jest and generate JUnit reports
-                sh 'npx jest --reporters=default --reporters=jest-junit --outputDirectory=test-results'
+                sh 'npx jest --config jest.config.js --reporters=default --reporters=jest-junit --outputDirectory=test-results'
             }
 
             post {
                 always {
+                    // Print workspace contents for debugging
+                    sh 'ls -R'
+
                     // Archive test reports
-                    junit 'test-results/*.xml'
+                    junit 'test-results/**/*.xml'
                 }
             }
         }
