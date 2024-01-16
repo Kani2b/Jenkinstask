@@ -18,7 +18,7 @@ pipeline {
             steps {
                 // Run automated unit tests using Jest
                 script {
-                    sh 'npx jest'
+                    sh 'npm jest'
                 }
             }
         }
