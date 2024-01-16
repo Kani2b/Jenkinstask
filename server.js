@@ -1,13 +1,15 @@
 const express = require('express');
 const app = express();
+const PORT = 3001;
 
-const PORT = 3000;
+// Define a route that returns a 404 status
+app.get('/', (req, res) => {
+  res.status(404).send('Not Found');
+});
 
-app.use(express.static('public'));
-
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-module.exports = app; // Export the app for testing purposes
+module.exports = server;
 
