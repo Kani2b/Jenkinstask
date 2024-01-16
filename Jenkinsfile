@@ -9,14 +9,12 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                // Install Node.js dependencies
                 sh 'npm install'
             }
         }
 
         stage('Run Automated Tests') {
             steps {
-                // Run automated unit tests using Jest
                 script {
                     sh 'npx jest'
                 }
@@ -25,7 +23,6 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                // Build Docker image
                 script {
                     sh 'docker build -t taskapp .'
                 }
@@ -36,7 +33,6 @@ pipeline {
     post {
         failure {
             script {
-                // Check test results
                 def testResult = sh(script: 'npx jest', returnStatus: true)
                 if (testResult != 0) {
                     echo 'Tests failed. Rolling back to the previous commit.'
@@ -44,10 +40,11 @@ pipeline {
                     // Revert the last commit
                     sh 'git reset --hard HEAD^'
 
-                    // Force-push to the repository (use with caution)
-                    sh 'git push -f origin main'
+                    // Force-push to the repository
+                    sh 'git push -f origin master'
                 }
             }
         }
     }
 }
+
