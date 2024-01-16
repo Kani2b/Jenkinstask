@@ -45,7 +45,7 @@ pipeline {
                     sh 'git reset --hard HEAD^'
 
                     // Force-push to the repository (use with caution)
-                    sh 'git push -f origin master'
+                    sh 'git push -f origin main'
                 }
             }
         }
