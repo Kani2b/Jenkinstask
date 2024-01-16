@@ -17,7 +17,7 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 // Run automated unit tests using Jest without publishing JUnit reports
-                sh 'npx jest
+                sh 'npx jest'
             }
         }
     }
@@ -29,4 +29,3 @@ pipeline {
         }
     }
 }
-
