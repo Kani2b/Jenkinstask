@@ -22,6 +22,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                // Build Docker image
+                script {
+                    sh 'docker build -t taskapp .'
+                }
+            }
+        }
     }
 
     post {
@@ -39,3 +48,4 @@ pipeline {
         }
     }
 }
+
