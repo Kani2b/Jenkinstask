@@ -23,7 +23,7 @@ pipeline {
             post {
                 always {
                     // Archive test reports
-                    junit 'junit-report/*.xml'
+                    junit '**/test-results/*.xml'
                 }
             }
         }
@@ -36,4 +36,5 @@ pipeline {
         }
     }
 }
+
 
