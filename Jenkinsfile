@@ -39,13 +39,15 @@ pipeline {
                 // Check test results
                 def testResult = sh(script: 'npx jest', returnStatus: true)
                 if (testResult != 0) {
-                    echo 'Tests failed. Triggering rollback.'
-                    // Implement rollback steps here
-                    // For example, you might use Git to revert to the previous commit
+                    echo 'Tests failed. Rolling back to the previous commit.'
+                    
+                    // Revert the last commit
                     sh 'git reset --hard HEAD^'
+
+                    // Force-push to the repository (use with caution)
+                    sh 'git push -f origin master'
                 }
             }
         }
     }
 }
-
