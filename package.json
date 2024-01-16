@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest --reporters=default --reporters=jest-junit",
+    "test": "jest --reporters=default --reporters=jest-junit --detectOpenHandles",
     "start": "node server.js",
     "build": "browserify -t [ babelify --presets [ @babel/preset-react @babel/preset-env ] ] src/main.js -o public/js/main.js"
   },
@@ -25,5 +25,13 @@
     "jest": "^27.5.1",
     "jest-junit": "^16.0.0",
     "supertest": "^6.3.3"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      ["jest-junit", { "outputDirectory": "test-results", "outputName": "junit.xml" }]
+    ],
+    "detectOpenHandles": true
   }
 }
+
